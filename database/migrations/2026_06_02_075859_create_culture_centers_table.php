@@ -16,6 +16,8 @@ public function up(): void
         $table->string('name');
         $table->string('location');
         $table->text('description')->nullable();
+         $table->string('avatar')->nullable();
+
         $table->timestamps();
     });
 }

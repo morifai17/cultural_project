@@ -18,7 +18,7 @@ return new class extends Migration
     
     $table->foreignId('hall_id')->nullable()->constrained();
     $table->foreignId('theater_id')->nullable()->constrained();
-    
+     $table->string('avatar')->nullable();
     $table->string('title');
     $table->text('description');
     $table->dateTime('start_time');

@@ -16,7 +16,7 @@ return new class extends Migration
     $table->foreignId('cultural_center_id') 
           ->constrained('cultural_centers')
           ->onDelete('cascade');
-          
+     $table->string('avatar')->nullable();      
     $table->string('name');
     $table->timestamps();
 });

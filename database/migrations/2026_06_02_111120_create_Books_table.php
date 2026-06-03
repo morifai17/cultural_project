@@ -20,6 +20,7 @@ return new class extends Migration
     $table->string('title');
     $table->string('author');
     $table->boolean('is_available')->default(true);
+    $table->string('avatar')->nullable();
     $table->timestamps();
 });
     }

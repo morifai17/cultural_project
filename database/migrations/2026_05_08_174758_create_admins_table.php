@@ -9,20 +9,14 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-  public function up(): void
+public function up(): void
 {
     Schema::create('admins', function (Blueprint $table) {
         $table->id();
         $table->string('name');
-        $table->string('email')->unique();
-        $table->timestamp('email_verified_at')->nullable();
+        $table->string('phone')->unique();
         $table->string('password');
-        
-        // Custom Admin Fields
-        $table->string('role')->default('manager'); // e.g., super-admin, editor
-        $table->boolean('is_active')->default(true);
-        $table->timestamp('last_login_at')->nullable();
-        
+        $table->enum('role', ['super_admin', 'admin'])->default('admin');
         $table->rememberToken();
         $table->timestamps();
     });

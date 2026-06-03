@@ -7,7 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    protected $fillable = ['name', 'email', 'password', 'admin_id'];
+    protected $fillable = ['first_name', 'last_name', 'phone', 'password'];
 
     // العلاقات مع الجداول الأخرى
     public function reservations() { return $this->hasMany(Reservation::class); }
