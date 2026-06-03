@@ -1,14 +1,27 @@
 <?php
 
 namespace App\Models;
-use Illuminate\Database\Eloquent\Model;
 
-class Admin extends Model
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
+
+class Admin extends Authenticatable
 {
-    protected $fillable = ['name', 'phone', 'password', 'role'];
-    
-    // تأكد من وجود خاصية التشفير
-    protected $hidden = ['password', 'remember_token'];
+    use HasApiTokens, Notifiable;
+
+    protected $fillable = [
+        'name', 
+        'phone', 
+        'password', 
+        'role'
+    ];
+
+    protected $hidden = [
+        'password', 
+        'remember_token',
+    ];
+
 
     public function notifications() 
     { 

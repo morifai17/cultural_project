@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CulturalCenterController;
 use App\Http\Controllers\TheaterController;
@@ -42,3 +43,5 @@ Route::prefix('theaters')->group(function () {
         Route::delete('/{id}', [TheaterController::class, 'remove']);
     });
 });
+Route::post('/admin/register', [AdminAuthController::class, 'register']);
+Route::post('/admin/login', [AdminAuthController::class, 'login']);
