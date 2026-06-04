@@ -83,4 +83,5 @@ class CulturalCenterController extends Controller
         $center->delete();
         return response()->json(['success' => true, 'message' => 'تم حذف المركز بنجاح'], 200);
     }
+    
 }

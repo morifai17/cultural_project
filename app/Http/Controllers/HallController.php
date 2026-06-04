@@ -59,4 +59,5 @@ class HallController extends Controller
         $hall->delete();
         return response()->json(['success' => true], 200);
     }
+    
 }

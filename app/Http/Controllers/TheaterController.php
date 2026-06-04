@@ -57,5 +57,7 @@ class TheaterController extends Controller
         if ($theater->avatar) Storage::disk('public')->delete($theater->avatar);
         $theater->delete();
         return response()->json(['success' => true, 'message' => 'تم حذف المسرح'], 200);
-    }
-}
+ 
+       }
+
+       }

@@ -52,4 +52,9 @@ class ActivityController extends Controller
         $act->delete();
         return response()->json(['success' => true], 200);
     }
+    public function getAverageRatingAttribute()
+{
+    // يحسب متوسط عمود 'value' للتقييمات المرتبطة بهذا الموديل
+    return $this->ratings()->avg('value');
+}
 }

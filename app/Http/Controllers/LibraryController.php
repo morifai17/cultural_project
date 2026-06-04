@@ -38,4 +38,5 @@ class LibraryController extends Controller
         $lib->delete();
         return response()->json(['success' => true], 200);
     }
+    
 }
