@@ -1,47 +1,74 @@
 <?php
 
-use App\Http\Controllers\AdminAuthController;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\CulturalCenterController;
-use App\Http\Controllers\TheaterController;
-use Illuminate\Foundation\Inspiring;
-use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\{
+    AuthController,
+    AdminAuthController,
+    CulturalCenterController,
+    HallController,
+    TheaterController,
+    LibraryController,
+    ActivityController
+};
+use Illuminate\Http\Request;
 
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
+Route::post('/admin/login', [AdminAuthController::class, 'login']);
+Route::post('/admin/register', [AdminAuthController::class, 'register']);
 
-// المسارات التي تتطلب تسجيل دخول (الموبايل يرسل الـ Token في الـ Header)
-Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/user', function (Request $request) {
-        return $request->user();
-    });
-    
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
 });
 
-Route::prefix('centers')->group(function () {
-    
-    // المسارات العامة (لا تحتاج حماية)
-    Route::get('/', [CulturalCenterController::class, 'index']);
 
-    // المسارات المحمية للـ Admin فقط
+Route::prefix('centers')->group(function () {
+    Route::get('/', [CulturalCenterController::class, 'index']);
+    
     Route::middleware('auth:admin')->group(function () {
         Route::post('/', [CulturalCenterController::class, 'add']);
         Route::post('/{id}', [CulturalCenterController::class, 'edit']);
         Route::delete('/{id}', [CulturalCenterController::class, 'remove']);
     });
 });
-Route::prefix('theaters')->group(function () {
-    // متاح للجميع
-    Route::get('/', [TheaterController::class, 'index']);
 
-    // محمي للأدمن فقط
+Route::prefix('theaters')->group(function () {
+    Route::get('/', [TheaterController::class, 'index']);
+    
     Route::middleware('auth:admin')->group(function () {
         Route::post('/', [TheaterController::class, 'add']);
-        Route::post('/{id}', [TheaterController::class, 'edit']); // تحديث
+        Route::post('/{id}', [TheaterController::class, 'edit']);
         Route::delete('/{id}', [TheaterController::class, 'remove']);
     });
 });
-Route::post('/admin/register', [AdminAuthController::class, 'register']);
-Route::post('/admin/login', [AdminAuthController::class, 'login']);
+
+
+Route::prefix('halls')->group(function () {
+    Route::get('/', [HallController::class, 'index']);
+    
+    Route::middleware('auth:admin')->group(function () {
+        Route::post('/', [HallController::class, 'add']);
+        Route::post('/{id}', [HallController::class, 'edit']);
+        Route::delete('/{id}', [HallController::class, 'remove']);
+    });
+});
+
+Route::prefix('libraries')->group(function () {
+    Route::get('/', [LibraryController::class, 'index']);
+    
+    Route::middleware('auth:admin')->group(function () {
+        Route::post('/', [LibraryController::class, 'add']);
+        Route::post('/{id}', [LibraryController::class, 'edit']);
+        Route::delete('/{id}', [LibraryController::class, 'remove']);
+    });
+});
+
+Route::prefix('activities')->group(function () {
+    Route::get('/', [ActivityController::class, 'index']);
+    
+    Route::middleware('auth:admin')->group(function () {
+        Route::post('/', [ActivityController::class, 'add']);
+        Route::post('/{id}', [ActivityController::class, 'edit']);
+        Route::delete('/{id}', [ActivityController::class, 'remove']);
+    });
+});

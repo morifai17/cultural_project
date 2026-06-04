@@ -16,10 +16,10 @@ return [
             'provider' => 'users',
         ],
         // تم دمج حارس الأدمن هنا
-        'admin' => [
-            'driver' => 'session',
-            'provider' => 'admins',
-        ],
+       'admin' => [
+        'driver' => 'sanctum', // <--- هذا التغيير هو الأهم
+        'provider' => 'admins',
+    ],
     ],
 
     'providers' => [

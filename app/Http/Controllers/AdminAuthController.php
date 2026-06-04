@@ -34,30 +34,30 @@ class AdminAuthController extends Controller
     ], 201);
 }
     // تسجيل دخول الأدمن مع إصدار Token
-    public function login(Request $request)
-    {
-        $credentials = $request->validate([
-            'phone'    => 'required|string',
-            'password' => 'required|string',
-        ]);
+   public function login(Request $request)
+{
+    $credentials = $request->validate([
+        'phone'    => 'required|string',
+        'password' => 'required|string',
+    ]);
 
-        // نحاول تسجيل الدخول عبر الـ Guard
-        if (Auth::guard('admin')->attempt($credentials)) {
-            $admin = Auth::guard('admin')->user();
-            
-            // إصدار الـ Token هنا
-            $token = $admin->createToken('admin-token')->plainTextToken;
+    // 1. ابحث عن الأدمن برقم الهاتف
+    $admin = Admin::where('phone', $request->phone)->first();
 
-            return response()->json([
-                'message' => 'مرحباً بك مجدداً',
-                'admin'   => $admin,
-                'token'   => $token
-            ], 200);
-        }
-
+    // 2. تحقق من وجود الأدمن ومن صحة كلمة المرور
+    if (!$admin || !Hash::check($request->password, $admin->password)) {
         return response()->json(['message' => 'بيانات الدخول غير صحيحة'], 401);
     }
 
+    // 3. إذا كانت البيانات صحيحة، قم بإصدار الـ Token
+    $token = $admin->createToken('admin-token')->plainTextToken;
+
+    return response()->json([
+        'message' => 'مرحباً بك مجدداً',
+        'admin'   => $admin,
+        'token'   => $token
+    ], 200);
+}
   // تعديل البيانات (فقط للسوبر أدمن)
     public function edit(Request $request, $id)
     {
