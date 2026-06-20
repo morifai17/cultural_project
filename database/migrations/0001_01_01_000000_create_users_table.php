@@ -24,7 +24,6 @@ return new class extends Migration
             $table->string('phone')->unique()->nullable();       // رقم الموبايل (nullable في حال سجل عبر غوغل)
             $table->string('google_id')->unique()->nullable();   // معرف حساب غوغل (nullable في حال سجل عبر الهاتف)
             
-            $table->string('password')->nullable();             // كلمة المرور (nullable لأن مسجل غوغل لا يحتاجها فوراً)
             
             $table->rememberToken();
             $table->timestamps();

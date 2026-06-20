@@ -17,8 +17,8 @@ return new class extends Migration
     
     $table->foreignId('hall_id')->nullable()->constrained();
     $table->foreignId('theater_id')->nullable()->constrained();
-    $table->foreignId('activity_id')->nullable()->constrained();
-    
+    $table->foreignId('activity_id')->constrained();
+    $table->foreignId('librarie_id')->constrained();
     $table->date('reservation_date');
     $table->timestamps();
 });

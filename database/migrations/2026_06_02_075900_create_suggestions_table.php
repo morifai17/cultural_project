@@ -18,12 +18,8 @@ return new class extends Migration
     // محتوى الاقتراح أو الشكوى
     $table->text('content');
     
-    // الحالة (مثلاً: جديد، قيد المعالجة، تم الحل)
-    $table->string('status')->default('new');
-    
     // الـ Morph لربط الاقتراح بـ "هدف" معين (مركز، نشاط...)
     $table->morphs('suggestable'); 
-    
     $table->timestamps();
 });
     }

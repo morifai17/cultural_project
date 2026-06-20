@@ -22,7 +22,7 @@ return new class extends Migration
 
     $table->string('name');             
     $table->integer('capacity');       
-    $table->json('features')->nullable(); 
+    $table->json('description')->nullable(); 
     
     $table->timestamps();
 });
